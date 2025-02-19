@@ -1,22 +1,12 @@
 version: '3'
 services:
-  db:
-    image: postgres:13
-    environment:
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: products_db
-    ports:
-      - '5432:5432'
-    volumes:
-      - pgdata:/var/lib/postgresql/data
   app:
     build: .
     ports:
       - '3000:3000'
-    depends_on:
-      - db
+    volumes:
+      - db_data:/app/database.db
     environment:
-      DATABASE_URL: 'postgresql://user:password@db:5432/products_db?schema=public'
+      DATABASE_URL: 'file:./database.db'
 volumes:
-  pgdata:
+  db_data:

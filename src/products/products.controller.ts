@@ -73,7 +73,6 @@ export class ProductsController {
 
   @Delete(':id/photo')
   async deletePhoto(@Param('id', ParseIntPipe) id: number) {
-    // Дополнительно можно удалить файл из файловой системы
     return await this.productsService.updatePhoto(id, null);
   }
 }
